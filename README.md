@@ -32,7 +32,7 @@ Config support:
 
   ...
 
-  options.pythonOverlays = mkOption {
+  options.overlays.python = mkOption {
     type = types.listOf overlayType;
     default = [];
     description = ''
@@ -51,7 +51,7 @@ for the `pythonPackagesExtensions` you can define at the top-level:
        ] ++ (optionalExtensions (!self.isPy3k) [
          python2Extension
 -      ]) ++ pythonPackagesExtensions ++ [
-+      ]) ++ config.pythonOverlays ++ [
++      ]) ++ config.overlays.python ++ [
          overrides
        ]);
 ```
@@ -63,7 +63,7 @@ In a downstream overlay:
 # flake.nix or default.nix
 import poly-repo {
   ...
-  config.pythonOverlays = [ (final: _: {
+  config.overlays.python = [ (final: _: {
     myPythonPackage = final.callPackage ./package.nix { };
   )}];
 }
@@ -80,6 +80,7 @@ $ nix-build -A python312.pkgs.myPythonPackage
 ## Migration plan
 
 - If a package set does expose a way to inject overlays (e.g. python + `pythonPackagesExtensions`), then deprecate old usage.
+- `overlays` from the import statement should map to `overlays.pkgs`
 
 ## Future work
 
