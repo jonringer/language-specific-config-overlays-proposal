@@ -12,7 +12,7 @@ Created: 2024-9-17
 
 Extending language package sets (e.g. `python3Packages`) is notoriously difficult
 as each ecosystem is created differently. This proposal attempts to provide a
-series of `config.<language>Overlays` options in which overlays can be passed to
+series of `config.overlays.<scope>` options in which overlays can be passed to
 the respective package set(s).
 
 ## Detailed Implementation
